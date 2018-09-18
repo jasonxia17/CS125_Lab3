@@ -1,10 +1,7 @@
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class WebScraper {
     /**
@@ -51,13 +48,20 @@ public class WebScraper {
         return counter;
     }
 
+    public static int uniqueCounter(String[] words) {
+        Set<String> wordSet = new HashSet<>(Arrays.asList(words));
+        for (String word: wordSet) {
+            System.out.println(word);
+        }
+        return wordSet.size();
+    }
+
     public static void main(String[] unused) {
         String text = urlToString("http://erdani.com/tdpl/hamlet.txt");
         String[] words = stringToWordArray(text);
-        for (String word : words) {
-            System.out.println(word.length() + ": " + word);
-        }
+        // String[] words = {"apple", "banana", "carrot", "grape", "banana", "carrot"};
         System.out.println(words.length);
-        System.out.println(appearanceCount(words, "soul"));
+        System.out.println(appearanceCount(words, "carrot"));
+        System.out.println(uniqueCounter(words));
     }
 }
