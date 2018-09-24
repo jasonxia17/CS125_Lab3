@@ -71,9 +71,9 @@ public class TextProcessor {
         LinkedHashMap<String, Integer> sortedWordFreq =
                 HashMapUtils.sortByValue(wordFrequencies(words), true);
 
-        PrintWriter writer = new PrintWriter("HPWordFreq.txt", StandardCharsets.UTF_8);
+        PrintWriter writer = new PrintWriter("HPWordFreq.csv", StandardCharsets.UTF_8);
         for (Map.Entry<String, Integer> element : sortedWordFreq.entrySet()) {
-            writer.println(element.getKey() + ":\t" + element.getValue());
+            writer.println(element.getKey() + "," + element.getValue());
         }
         writer.close();
     }

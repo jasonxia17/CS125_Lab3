@@ -12,7 +12,7 @@ public class ObsoleteCode {
     }
 
     public static void printWriterTest() throws IOException {
-        PrintWriter writer = new PrintWriter("HPWordFreq.txt", StandardCharsets.UTF_8);
+        PrintWriter writer = new PrintWriter("HPWordFreq.csv", StandardCharsets.UTF_8);
         writer.println("The first line");
         writer.println("The second line");
         writer.close();
