@@ -22,19 +22,12 @@ public class WebScraper {
         return contents;
     }
 
-    public static String[] removeEmpty(String[] original) {
-        List<String> list = new ArrayList<>(Arrays.asList(original));
-        list.removeAll(Arrays.asList("", null));
-        return list.toArray(new String[0]);
-    }
-
     public static String[] stringToWordArray(String input) {
         String text = input;
         text = text.toLowerCase();
-        text = text.replaceAll("[\\s[\\p{Punct}&&[^']]]"," ");
 
+        text = text.replaceAll("[[^\\w]&&[^']]+"," ");
         String[] words = text.split(" ");
-        words = removeEmpty(words);
         return words;
     }
 
@@ -50,18 +43,34 @@ public class WebScraper {
 
     public static int uniqueCounter(String[] words) {
         Set<String> wordSet = new HashSet<>(Arrays.asList(words));
-        for (String word: wordSet) {
-            System.out.println(word);
-        }
         return wordSet.size();
     }
 
+    public static Map<String, Integer> wordFrequencies(String[] words) {
+        Map<String, Integer> wordFreq = new HashMap<>();
+        for (String word : words) {
+            if (wordFreq.containsKey(word)) {
+                wordFreq.put(word, wordFreq.get(word) + 1);
+            } else {
+                wordFreq.put(word, 1);
+            }
+        }
+        return wordFreq;
+    }
+
     public static void main(String[] unused) {
-        String text = urlToString("http://erdani.com/tdpl/hamlet.txt");
+        String text = urlToString("http://www.glozman.com/TextPages/Harry%20Potter%201%20-%20Sorcerer's%20Stone.txt");
         String[] words = stringToWordArray(text);
-        // String[] words = {"apple", "banana", "carrot", "grape", "banana", "carrot"};
         System.out.println(words.length);
-        System.out.println(appearanceCount(words, "carrot"));
         System.out.println(uniqueCounter(words));
+        System.out.println(appearanceCount(words, "apple"));
+        System.out.println(wordFrequencies(words).get("apple"));
+
+        ArrayList<Integer> wordFreq = new ArrayList<>(wordFrequencies(words).values());
+        Collections.sort(wordFreq);
+        Collections.reverse(wordFreq);
+        for (int i : wordFreq) {
+            System.out.println(i);
+        }
     }
 }
