@@ -1,9 +1,10 @@
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-public class WebScraper {
+public class TextProcessor {
     /**
      * Retrieve contents from a URL and return them as a string.
      *
@@ -46,8 +47,8 @@ public class WebScraper {
         return wordSet.size();
     }
 
-    public static Map<String, Integer> wordFrequencies(String[] words) {
-        Map<String, Integer> wordFreq = new HashMap<>();
+    public static HashMap<String, Integer> wordFrequencies(String[] words) {
+        HashMap<String, Integer> wordFreq = new HashMap<>();
         for (String word : words) {
             if (wordFreq.containsKey(word)) {
                 wordFreq.put(word, wordFreq.get(word) + 1);
@@ -58,19 +59,21 @@ public class WebScraper {
         return wordFreq;
     }
 
-    public static void main(String[] unused) {
-        String text = urlToString("http://www.glozman.com/TextPages/Harry%20Potter%201%20-%20Sorcerer's%20Stone.txt");
+    public static void main(String[] unused) throws IOException {
+        String text = urlToString(
+                "http://www.glozman.com/TextPages/Harry%20Potter%204%20-%20The%20Goblet%20Of%20Fire.txt");
         String[] words = stringToWordArray(text);
         System.out.println(words.length);
         System.out.println(uniqueCounter(words));
-        System.out.println(appearanceCount(words, "apple"));
-        System.out.println(wordFrequencies(words).get("apple"));
+        System.out.println(appearanceCount(words, "hermione"));
+        System.out.println(wordFrequencies(words).get("hermione"));
 
-        ArrayList<Integer> wordFreq = new ArrayList<>(wordFrequencies(words).values());
-        Collections.sort(wordFreq);
-        Collections.reverse(wordFreq);
-        for (int i : wordFreq) {
-            System.out.println(i);
+        LinkedHashMap<String, Integer> sortedWordFreq =
+                HashMapUtils.sortByValue(wordFrequencies(words), true);
+
+        PrintWriter writer = new PrintWriter("HPWordFreq.txt", StandardCharsets.UTF_8);
+        for (Map.Entry<String, Integer> element : sortedWordFreq.entrySet()) {
+            writer.println(element.getKey() + ": " + element.getValue());
         }
     }
 }
