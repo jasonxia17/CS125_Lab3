@@ -9,6 +9,6 @@ Originally for CS 125 Lab 3, but many functionalities have been extended.
 
 An attempt at visualizing Zipf's Law: https://simple.wikipedia.org/wiki/Zipf%27s_law
 
-Theoretically, the frequency of the word should be inversly proportional to the word's rank.
+Theoretically, the frequency of the word should be inversely proportional to the word's rank.
 
 Harry Potter and the Goblet of Fire, top 50 words from the csv file: https://www.desmos.com/calculator/n1fdceby78
