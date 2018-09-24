@@ -1,4 +1,6 @@
 # TextAnalyzer
 
 Converts txt files from the internet into an array of words.
-Provides various functions to analyze that array of words, including word counting, unique word counting, and word frequencies
+Provides various functions to analyze that array of words, including word counting, unique word counting, and word frequencies.
+
+Originally for CS 125 Lab 3, but many functionalities have been extended.
