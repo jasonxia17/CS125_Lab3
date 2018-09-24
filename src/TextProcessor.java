@@ -73,7 +73,8 @@ public class TextProcessor {
 
         PrintWriter writer = new PrintWriter("HPWordFreq.txt", StandardCharsets.UTF_8);
         for (Map.Entry<String, Integer> element : sortedWordFreq.entrySet()) {
-            writer.println(element.getKey() + ": " + element.getValue());
+            writer.println(element.getKey() + ":\t" + element.getValue());
         }
+        writer.close();
     }
 }
